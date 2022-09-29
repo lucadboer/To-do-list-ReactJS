@@ -1,0 +1,22 @@
+.containerInput form {
+  display: flex;
+  gap: 1rem;
+}
+
+.containerInput input {
+  width: 39.875rem;
+  height: 3.375rem;
+  padding: 0 1rem;
+  background-color: var(--gray-500);
+  border-radius: 8px;
+  border: 0;
+  color: var(--gray-200);
+}
+
+.checkList {
+  width: 100%;
+  width: 46rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
