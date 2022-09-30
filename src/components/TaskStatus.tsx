@@ -2,9 +2,10 @@ import styles from './TaskStatus.module.css'
 
 interface TasksStatusProps {
   tasksLenght: number
+  completedTasks: number
 }
 
-export function TaskStatus({ tasksLenght }:TasksStatusProps) {
+export function TaskStatus({ tasksLenght, completedTasks }:TasksStatusProps) {
 
   return (
   <div className={styles.headerCheckList}>
@@ -15,7 +16,7 @@ export function TaskStatus({ tasksLenght }:TasksStatusProps) {
 
   <div className={styles.sucessHeaderCheck}>
     <h3>Concluídas</h3>
-    <span>0 de {tasksLenght}</span>
+    <span>{completedTasks} de {tasksLenght}</span>
   </div>
 </div>
   )

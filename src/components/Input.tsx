@@ -1,4 +1,4 @@
-import { useState, FormEvent, ChangeEvent } from 'react'
+import { useState, FormEvent, ChangeEvent, InvalidEvent } from 'react'
 import { Button } from './Button'
 import styles from './Input.module.css'
 import { NoTask } from './NoTask'
@@ -10,7 +10,10 @@ export function Input() {
 
   const [newContentTask, setNewContentTask] = useState('')
 
-  const [tasks, setTasks] = useState([''])
+  const [tasks, setTasks] = useState<Array<string>>([])
+
+  const [completedTasks, setCompletedTasks] = useState<Array<string>>([])
+
 
   function handleNewTask(event:FormEvent) {
     event.preventDefault()
@@ -19,8 +22,13 @@ export function Input() {
   }
 
   function handleNewContentTask(event: ChangeEvent<HTMLInputElement>) {
+    event.target.setCustomValidity('')
     setNewContentTask(event.target.value)
   }
+
+  function handleNewTaskInvalid(event: InvalidEvent<HTMLInputElement>) {
+		event.target.setCustomValidity('Digite uma tarefa...')
+	}
 
   function deleteTask(taskToDelete: string) {
     const tasksWithOutDelete = tasks.filter(task => {
@@ -29,16 +37,34 @@ export function Input() {
     setTasks(tasksWithOutDelete)
   }
 
+  function isCompleted(completedTask: string, status: boolean) {
+    tasks.map((task) => {
+      if (task === completedTask && status === false) {
+        setCompletedTasks([...completedTasks, task])
+      }
+      else {
+        const onlyCompletedTasks = completedTasks.filter(task => {
+          if (task === completedTask && status === false) {
+            return task
+          }
+          setCompletedTasks(onlyCompletedTasks)
+        })
+      }
+    })
+  }
+
   return (
     <div>
       <div className={styles.containerInput}>
         <form onSubmit={handleNewTask}>
           <input
+            className={styles.taskInput}
             placeholder="Adicione uma nova tarefa"
             type="text"
             value={newContentTask}
             onChange={handleNewContentTask}
             required
+            onInvalid={handleNewTaskInvalid}
             autoFocus
           />
           <Button />
@@ -47,6 +73,7 @@ export function Input() {
 
       <TaskStatus 
         tasksLenght={tasks.length}
+        completedTasks={completedTasks.length}
       />
 
       <div className={styles.checkList}>
@@ -54,6 +81,7 @@ export function Input() {
           return <Task 
             key={task}
             content={task}
+            onCompletedTask={isCompleted}
             onDeleteTask={deleteTask}
           />
         })}

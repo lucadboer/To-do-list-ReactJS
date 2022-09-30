@@ -1,42 +1,43 @@
 import { Trash } from 'phosphor-react'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, MouseEventHandler, useState } from 'react'
+import { BsFillCheckCircleFill } from 'react-icons/bs'
+import { Button } from './Button'
 
 import styles from './Task.module.css'
 
 export interface TaskProps {
   content: string
+  onCompletedTask: (task: string) => void
   onDeleteTask: (task: string) => void
 }
 
-export function Task( { content, onDeleteTask }:TaskProps ) {
+export function Task( { content, onDeleteTask, onCompletedTask }:TaskProps ) {
+  const [isCompleted, setIsCompleted] = useState(false)
 
-  const [check, setCheck] = useState(false)
 
   function handleDeleteTask() {
     onDeleteTask(content)
   }
 
-  function handleChecked(event: ChangeEvent<HTMLInputElement>) {
-    setCheck(event.target.checked)
-    console.log(check);
-    
+
+  function handleCompletedTask() {
+    setIsCompleted(isCompleted ? false : true)
+    onCompletedTask(content)   
   }
 
+
   return (
-    <div className={styles.task}>
+    <div className={isCompleted ? styles.taskOff : styles.taskOn}>
 
       <div className={styles.taskContent}>
-        <input 
-          type="checkbox" 
-          name="checkBoxTask" 
-          id='check'
-          checked = {check}
-          onChange = {handleChecked} 
-          />
+        <button className={styles.checkedContainer} onClick={handleCompletedTask}>
+          {isCompleted ? <BsFillCheckCircleFill /> : <div />}
+        </button>
+          
         <p>{content}</p>
       </div>
 
-      <button title='Deletar Tarefa' onClick={handleDeleteTask}>
+      <button className={styles.deleteButton} title='Deletar Tarefa' onClick={handleDeleteTask}>
         <Trash size={24} />
       </button>
     </div>
