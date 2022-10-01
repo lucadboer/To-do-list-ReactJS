@@ -5,7 +5,7 @@
     
 <span align="center">
     <img height="300" src="./.github/preview-without-task.png">
-    <img height="300" src="./.github/preview-without-task.png">
+    <img height="300" src="./.github/preview-with-task.png">
 </span>
     
 </p>
