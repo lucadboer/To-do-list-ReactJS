@@ -24,5 +24,5 @@ First challenge developed from the Ignite ReactJS track, practicing and laying d
 
 ## 💛 Contact
 
-<p> Email --> luca.boer@outlook.com </p>
-<p> Linkedin --> https://www.linkedin.com/in/luca-destefano-boer-99674121b/ </p>
+- Email --> luca.boer@outlook.com
+- Linkedin --> https://www.linkedin.com/in/luca-destefano-boer-99674121b/
