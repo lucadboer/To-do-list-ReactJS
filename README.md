@@ -22,6 +22,14 @@ First challenge developed from the Ignite ReactJS track, practicing and laying d
 - TypeScript
 - CSS Modules
 
+## 🧑‍💻 Applications
+
+- React Hooks
+- immutability
+- Components
+- Typing with typescript
+- CSS-Modules
+
 ## 💛 Contact
 
 - Email --> luca.boer@outlook.com
